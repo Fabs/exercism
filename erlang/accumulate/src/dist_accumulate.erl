@@ -5,7 +5,6 @@
 accumulate(Fn, Ls) ->
     Procs = lists:map(fun(L) -> init(Fn,L) end, Ls),
     Answers = receive_all(length(Ls), dict:new()),
-    io:fwrite("Answers: ~p ~n", [dict:fetch_keys(Answers)]),
     lists:foldr(fun (K, A) -> result_fallback(Answers, K, A) end, [], Procs).
 
 result_fallback(Answers, Key, A) ->

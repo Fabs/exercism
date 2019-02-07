@@ -1,0 +1,10 @@
+{"1.1.0",
+[{<<"erl_exercism">>,{pkg,<<"erl_exercism">>,<<"0.1.2">>},0},
+ {<<"eunit_formatters">>,{pkg,<<"eunit_formatters">>,<<"0.5.0">>},0},
+ {<<"parse_trans">>,{pkg,<<"parse_trans">>,<<"3.1.0">>},1}]}.
+[
+{pkg_hash,[
+ {<<"erl_exercism">>, <<"15EC52FDE539CAB6DF57ABC5AD73D8DD99B6BE406FF67E106A597FACEA7CDCFA">>},
+ {<<"eunit_formatters">>, <<"6A9133943D36A465D804C1C5B6E6839030434B8879C5600D7DDB5B3BAD4CCB59">>},
+ {<<"parse_trans">>, <<"1BAD3B959941CC53FFD6F4769A5D2666F9CDF179B2D62826636497D3FBAD9EC0">>}]}
+].
