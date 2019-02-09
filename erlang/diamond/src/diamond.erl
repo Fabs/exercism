@@ -4,14 +4,25 @@
 
 
 rows([L | []]) ->
-    Chars = list:seq($A, L),
-    Diamond = diamond(Chars),
-    io:fwrite("~p", Diamond).
+    Chars = lists:seq($A, L),
+    diamond(Chars).
 
 diamond(Cs) ->
-    Piramid = piramid(Cs),
-    MainLine = mainLine(Cs),
-    Piramid ++ MainLine ++ lists:reverse(Piramid).
+    DiamondLetters = diamond_levels(Cs),
+    DiamondHalf = length(Cs),
+    lists:map(fun(C) -> make_line(C, DiamondHalf) end, DiamondLetters).
 
-piramid(_Cs) -> "".
-mainLine(_Cs) -> "".
+diamond_levels(Cs) -> Cs ++ tl(lists:reverse(Cs)).
+
+make_line($A, Size) ->
+    Outter = make_spaces(Size - 1),
+    Outter ++ "A" ++ Outter;
+
+make_line(C, Size) ->
+    Move = C - $A,
+    Outter = make_spaces(Size - Move - 1),
+    Inner = make_spaces(1 + (Move - 1)*2),
+    Cs = [C | []],
+    Outter ++ Cs ++ Inner ++ Cs ++ Outter.
+
+make_spaces(N) -> lists:foldl(fun(_, S) -> " " ++ S end, "", lists:seq(1,N)).
