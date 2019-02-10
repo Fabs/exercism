@@ -17,6 +17,8 @@
   {"I",    1}
 ]).
 
+%% Converts integers to roman numbers
+%% e.g. 11 -> "XI"
 roman(Number) when Number =< 0 -> {error, "Only positive numbers are allowed"};
 roman(Number) -> roman(Number, "").
 roman(0, RomanAcc) -> RomanAcc;
@@ -25,17 +27,14 @@ roman(Number, RomanAcc) ->
     [{RomanNumber ,NextNumber}| _ ] = lists:dropwhile(Pred, ?ROMANS),
     roman(Number - NextNumber,RomanAcc ++ RomanNumber).
 
-
+%% Converts roman numbers to integers
+%% e.g. "XI" -> 11
 fromRoman(Number) ->
     Reverse = lists:reverse(Number),
     {Sum, _}= lists:foldl(fun number_positional/2, {0, $Z}, Reverse),
     Sum.
 
-number_positional(C, {S, L}) ->
-    case numerals(C) >= numerals(L) of
-        true -> {numerals(C) + S, C};
-        false -> {-1*numerals(C) + S, L}
-    end.
+%% Internal
 
 numerals($M) -> 1000;
 numerals($D) -> 500;
@@ -45,3 +44,10 @@ numerals($X) -> 10;
 numerals($V) -> 5;
 numerals($I) -> 1;
 numerals($Z) -> 0.
+
+number_positional(C, {S, L}) ->
+    case numerals(C) >= numerals(L) of
+        true -> {numerals(C) + S, C};
+        false -> {-1*numerals(C) + S, L}
+    end.
+
